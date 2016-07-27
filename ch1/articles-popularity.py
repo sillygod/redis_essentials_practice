@@ -8,21 +8,21 @@ class RedisClient:
     """
 
     def __init__(self):
-        self.client = redis.StrictRedis(host='localhost', port=6379)
+        self._client = redis.StrictRedis(host='localhost', port=6379)
 
     def upVote(self, id):
         key = "article:{}:votes".format(id)
-        self.client.incr(key)
+        self._client.incr(key)
 
     def downVote(self, id):
         key = "article:{}:votes".format(id)
-        self.client.decr(key)
+        self._client.decr(key)
 
     def showResults(self, id):
         headlineKey = "article:" + str(id) + ":headline"
         voteKey = "article:" + str(id) + ":votes"
 
-        res = self.client.mget([headlineKey, voteKey])
+        res = self._client.mget([headlineKey, voteKey])
         print("The article {} has {} votes".format(res[0], res[1]))
 
 
