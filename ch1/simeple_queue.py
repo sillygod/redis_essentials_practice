@@ -7,7 +7,7 @@ class RedisQueue:
     """
 
     def __init__(self, name):
-        self._client = redis.StrictRedis(host='localhost', port=6369)
+        self._client = redis.StrictRedis(host='localhost', port=6379)
         self._qname = name
         self._qkey = "queues:" + self._qname
         self.timeout = 0
